@@ -1,0 +1,86 @@
+#headers {
+  display: grid;  
+  grid-template-columns: 75% 25%;
+  gap: 5px;
+  background-color: rgb(161, 227, 243);  
+  font-size: 10px;
+  text-align: center;
+  border-bottom: 5px double rgb(11, 132, 141); 
+}
+
+#wrapper {
+  display: grid;
+  grid-template-columns: 75% 25%;
+
+}
+
+#employeers {
+  display: grid;
+  gap: 3px;
+  grid-template-rows: 50px 50px 1fr;
+  grid-template-columns: repeat(26, 150px);
+  overflow-x: scroll;
+  background-color:  rgb(210, 243, 232);
+}
+
+#charEmployeers {
+  display: grid;
+  grid-template-rows: 75px 1fr;  
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#filteredUsers {
+  margin-bottom: 15px;
+}
+
+#listEmployeers {
+  margin-bottom: 10px;
+}
+
+.isActive {
+  color: blue;
+}
+
+#employeersBirthday {
+  display: grid;
+  background-color: rgb(210, 243, 232);
+  border-left: 5px double rgb(11, 132, 141); 
+}
+
+h2 {
+  text-align: center;
+}
+
+#filteredUsersBirthday {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#monthEmployeers {
+  margin-top: 10px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.headerMonths {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: flex-start;
+}
+ #listEmployeersBirthday {
+   font-size: 16px;
+   font-weight: normal;
+   margin-top: 7px;
+ }
+  
+ 
