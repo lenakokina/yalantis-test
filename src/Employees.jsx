@@ -11,10 +11,8 @@ export function Employees(props) {
                     ...users[id],
                     isActive: event.target.id === 'active',
                 },
-            }
-        )
+            })
     }
-
     const filteredUsers = Object.keys(users).filter(user => {
         if (users[user].firstName.charAt(0) === char) {
             return users[user];
