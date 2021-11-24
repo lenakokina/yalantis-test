@@ -3,8 +3,8 @@ import { Employees } from './Employees';
 import { EmployeesByMonth } from './EmployeesByMonth';
 
 export default class App extends Component {
-  alphavit = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-  months = ['November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October']
+  alphavit = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   state = {
     error: null,
     isLoaded: false,
@@ -65,6 +65,9 @@ export default class App extends Component {
 
   render() {
     const { error, isLoaded, users } = this.state;
+    const currentMonth = new Date().getMonth();
+    const sortedMonths = [...this.months.slice(currentMonth), ...this.months.slice(0, currentMonth)];   
+    
     if (error) {
       return <div>Ошибка: {error.message}</div>
     }
@@ -83,7 +86,7 @@ export default class App extends Component {
               {/* <span><h1>Employees</h1></span> */}
               {this.alphavit.map(char => {
                 return (
-                  <div id="charEmployeers">
+                  <div key={char} id="charEmployeers">
                     <div id="header">{char}</div>
                     <div id="listEmployeers">
                       <Employees
@@ -96,18 +99,19 @@ export default class App extends Component {
               })}
             </div>
             <div id="employeersBirthday"><h2>Months</h2>
-              {this.months.map((month, index) => {
+              {sortedMonths.map((month, index) => {
                 return (
-                  <div id="monthEmployeers">
+                  <div key={month} id="monthEmployeers">
                     <div id="headerMonths">{month}
                       <div id="listEmployeersBirthday">
                         <EmployeesByMonth
+                          beforeCurrentMonth={index - (sortedMonths.length - currentMonth) }
+                          afterCurrentMonth={currentMonth + index}
                           month={month}
                           monthsNumber={index}
                           users={users} />
                       </div>
                     </div>
-
                   </div>
                 )
               })}
@@ -118,8 +122,3 @@ export default class App extends Component {
     }
   }
 }
-
-
-
-
-

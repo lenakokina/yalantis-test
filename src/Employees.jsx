@@ -23,38 +23,40 @@ export function Employees(props) {
 
     if (filteredUsers.length) {
         return filteredUsers.map(employeer => {
-            return (<div id="filteredUsers">
-                <div className={users[employeer].isActive && 'isActive'}>
-                    {users[employeer].firstName} {users[employeer].lastName}
-                </div>
-                <form>
-                    <label>
-                        <input
-                            onClick={(event) => {
-                                handleButtonClickActive(users[employeer].id, event)
-                            }}
-                            type="radio"
-                            id="active"
-                            name="input"
-                            checked={users[employeer].isActive}
-                        />
-                        active
-                    </label>
+            return (
+                <div key={employeer} id="filteredUsers">
+                    <div className={users[employeer].isActive ? 'isActive' : ''}>
+                        {users[employeer].firstName} {users[employeer].lastName}
+                    </div>
+                    <form>
+                        <label>
+                            <input
+                                onClick={(event) => {
+                                    handleButtonClickActive(users[employeer].id, event)
+                                }}
+                                type="radio"
+                                id="active"
+                                name="input"
+                                defaultChecked={users[employeer].isActive}
+                            />
+                            active
+                        </label>
 
-                    <label>
-                        <input
-                            onClick={(event) => {
-                                handleButtonClickActive(users[employeer].id, event)
-                            }}
-                            type="radio"
-                            id="noactive"
-                            name="input"
-                            checked={!users[employeer].isActive}
-                        />
-                        not active
-                    </label>
-                </form>
-            </div>)
+                        <label>
+                            <input
+                                onClick={(event) => {
+                                    handleButtonClickActive(users[employeer].id, event)
+                                }}
+                                type="radio"
+                                id="noactive"
+                                name="input"
+                                defaultChecked={!users[employeer].isActive}
+                            />
+                            not active
+                        </label>
+                    </form>
+                </div>
+            )
         })
     } else {
         return <div>No employees</div>

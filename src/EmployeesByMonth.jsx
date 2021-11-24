@@ -1,22 +1,12 @@
 import React from 'react';
 
 export function EmployeesByMonth(props) {
-    const { users, handlerButtonClick, monthsNumber } = props;
-
-    const handleButtonClickActive = (id, event) => {
-        handlerButtonClick(
-            {
-                ...users,
-                [id]: {
-                    ...users[id],
-                    isActive: event.target.id === 'active',
-                },
-            }
-        )
-    }
-    
+    const { users, beforeCurrentMonth, afterCurrentMonth } = props;
     const filteredUsers = Object.keys(users).filter(user => {
-        if (users[user].isActive && new Date(users[user].dob).getMonth() === monthsNumber - 2) {
+        const userDob = new Date(users[user].dob).getMonth();
+
+        if (users[user].isActive
+            && (userDob === beforeCurrentMonth || userDob === afterCurrentMonth)) {
             return users[user];
         }
     })
@@ -35,24 +25,18 @@ export function EmployeesByMonth(props) {
                 return 0;
             }
         })
+
         return filteredUsers.map(employeer => {
-            return (<div id="filteredUsersBirthday">
-                <div className={users[employeer].isActive && 'isActive'}>
-                    {users[employeer].lastName} {users[employeer].firstName} -
-                    {new Date(users[employeer].dob).toDateString()}
+            return (
+                <div key={employeer} id="filteredUsersBirthday">
+                    <div className={users[employeer].isActive && 'isActive'}>
+                        {users[employeer].lastName} {users[employeer].firstName} -
+                        {new Date(users[employeer].dob).toDateString()}
+                    </div>
                 </div>
-            </div>)
+            )
         })
     } else {
         return <div>No employees</div>
     }
-
 }
-
-
-
-
-
-
-
-
