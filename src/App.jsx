@@ -63,11 +63,39 @@ export default class App extends Component {
     localStorage.setItem('users', JSON.stringify(newUsersState))
   }
 
+  handleButtonActiveAllClick = (event) => {
+    const users = Object.keys(this.state.users).reduce((acc, item) => {
+      return {
+        ...acc,
+        [item]: {
+          ...this.state.users[item],
+          isActive: true,
+        }
+      }
+    }, {})
+    this.setState({users})
+  }
+
+
+  handleButtonNoActiveAllClick = (event) => {
+    const users = Object.keys(this.state.users).reduce((acc, item) => {
+      return {
+        ...acc,
+        [item]: {
+          ...this.state.users[item],
+          isActive: false,
+        }
+      }
+    }, {})
+    this.setState({ users })
+  }
+
+
   render() {
     const { error, isLoaded, users } = this.state;
     const currentMonth = new Date().getMonth();
-    const sortedMonths = [...this.months.slice(currentMonth), ...this.months.slice(0, currentMonth)];   
-    
+    const sortedMonths = [...this.months.slice(currentMonth), ...this.months.slice(0, currentMonth)];
+
     if (error) {
       return <div>Ошибка: {error.message}</div>
     }
@@ -80,6 +108,10 @@ export default class App extends Component {
           <div id="headers">
             <h1 id="headerEmployees">Employees</h1>
             <h1 id="headerEmployeesBirthday">Employees birthday</h1>
+            <div id="buttons">
+              <button onClick={this.handleButtonActiveAllClick} className="button" id="active">Active</button>
+              <button onClick={this.handleButtonNoActiveAllClick} className="button" id="noactive">No active</button>
+            </div>
           </div>
           <div id="wrapper">
             <div id="employeers">
@@ -105,7 +137,7 @@ export default class App extends Component {
                     <div id="headerMonths">{month}
                       <div id="listEmployeersBirthday">
                         <EmployeesByMonth
-                          beforeCurrentMonth={index - (sortedMonths.length - currentMonth) }
+                          beforeCurrentMonth={index - (sortedMonths.length - currentMonth)}
                           afterCurrentMonth={currentMonth + index}
                           month={month}
                           monthsNumber={index}
@@ -122,3 +154,13 @@ export default class App extends Component {
     }
   }
 }
+
+ // buttonClickActive = (users) => {
+  //   const usersactive = {
+  //     ...this.state.users,
+  //     ...users,
+  //   }
+  //   this.setState({
+  //     users: usersactive,
+  //   })
+  // }
