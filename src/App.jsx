@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Employees } from './Employees';
 import { EmployeesByMonth } from './EmployeesByMonth';
-import { config } from './config';
 
 export default class App extends Component {
   alphavit = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -64,34 +63,6 @@ export default class App extends Component {
     localStorage.setItem('users', JSON.stringify(newUsersState))
   }
 
-  handleButtonActiveAllClick = (event) => {
-    const users = Object.keys(this.state.users).reduce((acc, item) => {
-      return {
-        ...acc,
-        [item]: {
-          ...this.state.users[item],
-          isActive: true,
-        }
-      }
-    }, {})
-    this.setState({ users })
-  }
-
-
-  handleButtonNoActiveAllClick = (event) => {
-    const users = Object.keys(this.state.users).reduce((acc, item) => {
-      return {
-        ...acc,
-        [item]: {
-          ...this.state.users[item],
-          isActive: false,
-        }
-      }
-    }, {})
-    this.setState({ users })
-  }
-
-
   render() {
     const { error, isLoaded, users } = this.state;
     const currentMonth = new Date().getMonth();
@@ -109,25 +80,6 @@ export default class App extends Component {
           <div id="headers">
             <h1 id="headerEmployees">Employees</h1>
             <h1 id="headerEmployeesBirthday">Employees birthday</h1>
-            <div id="buttons">
-              {
-                config.isShowActiveDisactiveAll
-                && <>
-                  <button
-                    onClick={this.handleButtonActiveAllClick}
-                    className="button"
-                    id="active">
-                    Active
-                  </button>
-                  <button
-                    onClick={this.handleButtonNoActiveAllClick}
-                    className="button"
-                    id="noactive">
-                    No active
-                  </button>
-                </>
-              }
-            </div>
           </div>
           <div id="wrapper">
             <div id="employeers">
